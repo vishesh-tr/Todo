@@ -12,7 +12,7 @@ function Users() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
-    if (!user || user.email !== "vishesh@gmail.com") {
+    if (!user || user.role !== "admin") {
       navigate("/todo");
     } else {
       setIsAdmin(true);
@@ -21,12 +21,6 @@ function Users() {
 
   const handleDelete = (id) => {
     dispatch(deleteUser(id));
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("loggedInUser");
-    navigate("/login");
-    window.location.reload();
   };
 
   return isAdmin ? (

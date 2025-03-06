@@ -7,42 +7,66 @@ function DropdownMenu({ user, userImage, setProfileOpen }) {
 
   // Handle Logout Function
   const handleLogoutClick = () => {
-    localStorage.removeItem("loggedInUser"); 
-    localStorage.removeItem("profileImage"); 
-    setDropdownOpen(false); 
-    navigate("/login"); 
+    localStorage.removeItem("loggedInUser");
+    setDropdownOpen(false);
+    navigate("/login");
   };
 
   return (
     <div className="position-relative">
       {/* Profile Image Button */}
-      <button className="btn btn-secondary d-flex align-items-center" onClick={() => setDropdownOpen(!dropdownOpen)}>
-        <img src={userImage} alt="Profile" className="rounded-circle me-2" style={{ width: "30px", height: "30px" }} />
+      <button
+        className="btn btn-secondary d-flex align-items-center"
+        onClick={() => setDropdownOpen(!dropdownOpen)}
+      >
+        <img
+          src={userImage}
+          alt="Profile"
+          className="rounded-circle me-2"
+          style={{ width: "30px", height: "30px" }}
+        />
         Profile
       </button>
 
       {dropdownOpen && (
         <div className="dropdown-menu show position-absolute end-0 mt-2 p-2 shadow bg-white rounded">
           {/* Profile Button */}
-          <button className="dropdown-item d-flex align-items-center" onClick={() => navigate("/edit-profile")}> 
-            <img src={userImage} alt="Profile" className="rounded-circle me-2" style={{ width: "30px", height: "30px" }} />
+          <button
+            className="dropdown-item d-flex align-items-center"
+            onClick={() => navigate("/edit-profile")}
+          >
+            <img
+              src={userImage}
+              alt="Profile"
+              className="rounded-circle me-2"
+              style={{ width: "30px", height: "30px" }}
+            />
             Edit Profile
           </button>
 
           <div className="dropdown-divider"></div>
 
           {/* Dummy Todos Button */}
-          <button onClick={() => navigate("/dummy-todos")} className="dropdown-item">
+          <button
+            onClick={() => navigate("/dummy-todos")}
+            className="dropdown-item"
+          >
             Dummy Todos
           </button>
 
           {/* Admin-Only Buttons */}
-          {user?.email === "vishesh@gmail.com" && (
+          {user.role === "admin" && (
             <>
-              <button onClick={() => navigate("/users")} className="dropdown-item">
+              <button
+                onClick={() => navigate("/users")}
+                className="dropdown-item"
+              >
                 Users
               </button>
-              <button onClick={() => navigate("/all-todos")} className="dropdown-item">
+              <button
+                onClick={() => navigate("/all-todos")}
+                className="dropdown-item"
+              >
                 All Todos
               </button>
             </>
@@ -51,7 +75,10 @@ function DropdownMenu({ user, userImage, setProfileOpen }) {
           <div className="dropdown-divider"></div>
 
           {/* Logout Button */}
-          <button onClick={handleLogoutClick} className="dropdown-item text-danger">
+          <button
+            onClick={handleLogoutClick}
+            className="dropdown-item text-danger"
+          >
             Logout
           </button>
         </div>

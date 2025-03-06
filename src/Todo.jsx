@@ -37,12 +37,6 @@ function Todo() {
     setEditId(todo.id);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("loggedInUser");
-    navigate("/login");
-    window.location.reload();
-  };
-
   return (
     <div className="container mt-4">
       <h2>My Todos</h2>

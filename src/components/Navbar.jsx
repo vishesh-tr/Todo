@@ -1,28 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu";
 import ProfileModal from "./ProfileModal";
 
-const vishesh = new URL("../assets/vishesh.png", import.meta.url).href;
-const user = new URL("../assets/user.png", import.meta.url).href;
-const user1 = new URL("../assets/user1.png", import.meta.url).href;
-const user2 = new URL("../assets/user2.png", import.meta.url).href;
-const user3 = new URL("../assets/user3.png", import.meta.url).href;
-const user4 = new URL("../assets/user4.png", import.meta.url).href;
-
-function Navbar({ user, handleLogout }) {
+function Navbar(props) {
+  const { user, handleLogout } = props;
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
 
-  const isAdmin = user?.email === "vishesh@gmail.com";
-
-  const storedImage = localStorage.getItem("profileImage");
-
-  const defaultImages = { admin: vishesh, user, user1, user2, user3, user4 };
-
-  const userImage = storedImage || (isAdmin ? defaultImages.admin : defaultImages.user);
-
-  const appTitle = user ? `Todo App (${isAdmin ? "Admin" : "User"})` : "Todo App";
+  const appTitle = user
+    ? `Todo App (${user.role === "admin" ? "Admin" : "User"})`
+    : "Todo App";
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
@@ -32,7 +20,7 @@ function Navbar({ user, handleLogout }) {
         {user && (
           <DropdownMenu
             user={user}
-            userImage={userImage}
+            userImage={user.avatar}
             navigate={navigate}
             handleLogout={handleLogout}
             setProfileOpen={setProfileOpen}
@@ -41,7 +29,11 @@ function Navbar({ user, handleLogout }) {
       </div>
 
       {profileOpen && (
-        <ProfileModal user={user} userImage={userImage} onClose={() => setProfileOpen(false)} />
+        <ProfileModal
+          user={user}
+          userImage={user.avatar}
+          onClose={() => setProfileOpen(false)}
+        />
       )}
     </nav>
   );
