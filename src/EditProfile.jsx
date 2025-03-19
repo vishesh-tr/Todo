@@ -3,14 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateUser } from "./UserReducer";
 
-// const images = {
-//   vishesh: new URL("../assets/vishesh.png", import.meta.url).href,
-//   user: new URL("../assets/user.png", import.meta.url).href,
-//   user1: new URL("../assets/user1.png", import.meta.url).href,
-//   user2: new URL("../assets/user2.png", import.meta.url).href,
-//   user3: new URL("../assets/user3.png", import.meta.url).href,
-//   user4: new URL("../assets/user4.png", import.meta.url).href,
-// };
 
 function EditProfile(props) {
   const { avatars } = props;
